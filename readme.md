@@ -1,10 +1,9 @@
 ## About project:
 Simple weather application. User can enter a city name to see the current weather of that city. I have used **async await** function to fetch data. Language: html, tailwind, js.
-This app is created by **Rahat Faruk** (me). 
+This app is created by **Rahat Faruk** (me). [My Live App](https://rahatfaruk.github.io/rf-weather/)
 
 ### weather api:
 In this app, we will use [openweathermap](https://openweathermap.org/) api to fetch weather data. 
-My api key: `20ef5123a9a0fe8bcbe33b67c1f44079`, name: testing.
 
 ### design ideas:
   - [Minimal Weather App](https://dribbble.com/shots/19307787-Minimal-Weather-App)

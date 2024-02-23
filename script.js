@@ -1,11 +1,11 @@
 const weatherReportContainerEl = document.getElementById('weather-report-container')
 const cityNameForm = document.getElementById('city-name-form')
 
-
-const apiKey = '20ef5123a9a0fe8bcbe33b67c1f44079'
+const apiKey = 'f582bfdf5435fbc9b4169698c7c71d12'
 
 // render weather report by weather-info & location-info
 function displayWeather(locationInfo, weatherInfo) {
+  console.log(locationInfo, weatherInfo);
   const cityName = locationInfo.name 
   const country = weatherInfo.sys.country
   const description = weatherInfo.weather[0].description
@@ -66,12 +66,16 @@ function displayWeather(locationInfo, weatherInfo) {
 
 // fnc: fetch data
 async function fetchData(url) {
-  const response = await fetch(url)
-  if (!response.ok) {
-    throw new Error('Fetching data error: response is not ok.')
+  try {
+    const response = await fetch(url)
+    if (!response.ok) {
+      throw new Error('Fetching data error: response is not ok.')
+    }
+    const data = await response.json()
+    return data;
+  } catch (err) {
+    return err.message
   }
-  const data = await response.json()
-  return data;
 }
 
 // fnc: get location-info
@@ -96,6 +100,7 @@ async function getCurrWeatherInfo(location) {
 cityNameForm.addEventListener('submit', async (e) => {
   e.preventDefault()
   const cityName = cityNameForm['city-name'].value.trim()
+  console.log(cityName);
   
   try {
     const location = await getLocationInfo(cityName)
