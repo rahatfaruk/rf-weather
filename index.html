@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RF Weather app</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+  <h1 class="text-3xl text-center p-4 mb-4">RF Weather app</h1>
+
+  <!-- ## weather card -->
+  <div id="weather-card" class="p-6 mx-auto max-w-sm bg-gray-200">
+    <!-- ### city name form -->
+    <form id="city-name-form" class="flex mb-4">
+      <input type="text" name="city-name" class="px-4 py-1" placeholder="enter city name">
+      <button type="submit" class="px-3 py-1 bg-blue-300 hover:bg-blue-500">get weather</button>
+    </form>
+
+    <!-- ### weather report will inject inside here by js -->
+    <div id="weather-report-container">
+    </div>
+
+  </div>
+
+  <script src="./script.js"></script>
+</body>
+</html>
