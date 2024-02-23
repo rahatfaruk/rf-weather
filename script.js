@@ -5,7 +5,6 @@ const apiKey = 'f582bfdf5435fbc9b4169698c7c71d12'
 
 // render weather report by weather-info & location-info
 function displayWeather(locationInfo, weatherInfo) {
-  console.log(locationInfo, weatherInfo);
   const cityName = locationInfo.name 
   const country = weatherInfo.sys.country
   const description = weatherInfo.weather[0].description
@@ -100,7 +99,6 @@ async function getCurrWeatherInfo(location) {
 cityNameForm.addEventListener('submit', async (e) => {
   e.preventDefault()
   const cityName = cityNameForm['city-name'].value.trim()
-  console.log(cityName);
   
   try {
     const location = await getLocationInfo(cityName)

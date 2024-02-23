@@ -16,3 +16,6 @@ In this app, we will use [openweathermap](https://openweathermap.org/) api to fe
   - fetch weather info using the latitude & longitude of that location. visit [api docs](https://openweathermap.org/current) for details. 
   - by default, weather unit is kelvin. to get celcius, use `&units=metric` query at the end of weather fetch url.
   - make weather template based on the data & display weather info.
+
+### allow loading http (unsecured data) over https:
+we must use the following line in html head tag to load `http` request. Otherwise the request will be blocked on github page.  
