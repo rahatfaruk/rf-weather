@@ -18,4 +18,4 @@ In this app, we will use [openweathermap](https://openweathermap.org/) api to fe
   - make weather template based on the data & display weather info.
 
 ### allow loading http (unsecured data) over https:
-we must use the following line in html head tag to load `http` request. Otherwise the request will be blocked on github page.  
+we must use this line (`<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`) in html head tag to load `http` request. Otherwise the request will be blocked on github page. 
