@@ -11,11 +11,15 @@ In this app, we will use [openweathermap](https://openweathermap.org/) api to fe
   - [Weather App](https://www.figma.com/community/file/1158928016905524023)
 
 ### How this app works (steps):
+  1. when user search for a city name:
   - take a city name from the user (using form)
   - based on the city name, fetch location info (latitude & longitude) using [geocoding api](https://openweathermap.org/api/geocoding-api).
   - fetch weather info using the latitude & longitude of that location. visit [api docs](https://openweathermap.org/current) for details. 
   - by default, weather unit is kelvin. to get celcius, use `&units=metric` query at the end of weather fetch url.
   - make weather template based on the data & display weather info.
+  2. when user click local-weather btn:
+  - get position object of user's current location using `navigator.geolocation` api.
+  - in position object, we use lat(latitude) and lon(longitude) to fetch location like previous (1.) step.
 
 ### allow loading http (unsecured data) over https:
-we must use this line (`<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`) in html head tag to load `http` request. Otherwise the request will be blocked on github page. 
+we must use this line (`<meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">`) in html head tag to load `http` request to `openweathermap`. Otherwise the request will be blocked on github page. 

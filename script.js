@@ -1,11 +1,12 @@
 const weatherReportContainerEl = document.getElementById('weather-report-container')
 const cityNameForm = document.getElementById('city-name-form')
+const localWeatherBtn = document.getElementById('local-weather-btn')
 
 const apiKey = 'f582bfdf5435fbc9b4169698c7c71d12'
 
 // render weather report by weather-info & location-info
 function displayWeather(locationInfo, weatherInfo) {
-  const cityName = locationInfo.name 
+  const cityName = locationInfo.name ? locationInfo.name : weatherInfo.name
   const country = weatherInfo.sys.country
   const description = weatherInfo.weather[0].description
   const icon = weatherInfo.weather[0].icon
@@ -95,6 +96,22 @@ async function getCurrWeatherInfo(location) {
   return weatherObj
 }
 
+// fnc: get current location of the user
+function getCurrentLocation(callback) {
+  // check if geolocation supports or not
+  if(!navigator.geolocation) {
+    alert('geolocation is not supported by this browser')
+    return
+  }
+
+  // do something when position is available
+  navigator.geolocation.getCurrentPosition(geoPosition => {
+    callback(geoPosition)
+  }, error => {
+    alert('Error getting location: ', error.message)
+  })
+}
+
 // ## get & display weather when user enter a city name
 cityNameForm.addEventListener('submit', async (e) => {
   e.preventDefault()
@@ -109,4 +126,13 @@ cityNameForm.addEventListener('submit', async (e) => {
   } catch(err) {
     weatherReportContainerEl.innerHTML = '<p class="text-red-700">Your city name is incorrect! Enter correct one!</p>'
   }
+})
+
+// ## get local weather 
+localWeatherBtn.addEventListener('click', () => {
+  getCurrentLocation(async (position) => {
+    const location = {lat: position.coords.latitude, lon: position.coords.longitude}
+    const weather = await getCurrWeatherInfo(location)
+    displayWeather(location, weather)
+  })
 })
