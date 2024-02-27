@@ -11,11 +11,12 @@ function displayWeather(locationInfo, weatherInfo) {
   const description = weatherInfo.weather[0].description
   const icon = weatherInfo.weather[0].icon
   const temp = weatherInfo.main.temp.toFixed(0)
-  const tempMin = weatherInfo.main.temp_min.toFixed(1)
-  const tempMax = weatherInfo.main.temp_max.toFixed(1)
   const humidity = weatherInfo.main.humidity
   const wind = weatherInfo.wind.speed
   const clouds = weatherInfo.clouds.all
+  let sunrise = getFormattedTimeFromMS(weatherInfo.sys.sunrise)
+  let sunset = getFormattedTimeFromMS(weatherInfo.sys.sunset)
+  
 
   // icon url
   const iconUrl = `https://openweathermap.org/img/wn/${icon}@2x.png`
@@ -38,15 +39,23 @@ function displayWeather(locationInfo, weatherInfo) {
         </div>
       </div>
 
-      <p class="text-gray-500 mb-2">
-        <span class="mr-4">Min: ${tempMin}&deg;C</span>
-        <span>Max: ${tempMax}&deg;C</span> 
-      </p>
+      <!-- sunset & sunrise -->
+      <div class="flex justify-around">
+        <p>
+          <span class="block text-gray-500 text-sm">Sunrise</span>
+          <span class="font-bold">${sunrise} am</span>
+        </p>
+        <p>
+          <span class="block text-gray-500 text-sm">Sunset</span>
+          <span class="font-bold">${sunset} pm</span>
+        </p>
+      </div>
+
       <!-- extra info -->
       <div class="flex justify-between gap-4 mt-4 p-4 border-t border-gray-400 border-dashed">
         <div>
           <h3 class="text-gray-500">Wind</h3>
-          <p class="font-bold">NE ${wind}mph</p>
+          <p class="font-bold">${wind}m/s</p>
         </div>
         <div>
           <h3 class="text-gray-500">Humidity</h3>
@@ -63,6 +72,23 @@ function displayWeather(locationInfo, weatherInfo) {
 
   weatherReportContainerEl.innerHTML = weatherReportTemplate
 } 
+
+// fnc: format time 
+function getFormattedTimeFromMS(milliseconds) {
+  const normalMsLen = Date.now().toString().length
+  let formattedMilliseconds = parseInt(milliseconds.toString().padEnd(normalMsLen, '0'))
+
+  const time = new Date(formattedMilliseconds)
+  let hr = time.getHours()
+  // convert 24 hr to 12 hr format
+  hr = (hr > 12) ? hr - 12 : hr
+  // make 1 char long hr into 2 char 
+  hr = hr.toString().length === 1 ? '0'+hr : hr
+  let min = time.getMinutes()
+  min = min.toString().length === 1 ? '0'+min : min
+
+  return (hr + ':' + min);
+}
 
 // fnc: fetch data
 async function fetchData(url) {

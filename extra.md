@@ -18,13 +18,21 @@
     </div>
   </div>
 
-  <p class="text-gray-500 mb-2">
-    <span class="mr-4">Min: <span id="min-temp">37</span>&deg;C</span>
-    <span>Max: <span id="max-temp">42</span>&deg;C</span> 
-  </p>
+  <!-- sunset & sunrise -->
+  <div class="flex justify-around bg-night. min-h-24.">
+    <p>
+      <span class="block text-gray-500 text-sm">Sunrise</span>
+      <span class="font-bold">6.30 am</span>
+    </p>
+    <p>
+      <span class="block text-gray-500 text-sm">Sunset</span>
+      <span class="font-bold">6.00 pm</span>
+    </p>
+  </div>
+
   <!-- extra info -->
   <div class="flex justify-between gap-4 mt-4 p-4 border-t border-gray-400 border-dashed">
-    <div class="">
+    <div>
       <h3 class="text-gray-500">Wind</h3>
       <p class="font-bold">NE 6mph</p>
     </div>
